@@ -5,7 +5,7 @@ import { select } from "../store/selected";
 import CardContainer from "./card-container";
 import Caption from "./caption";
 import Image from "./image";
-import { isSelected } from "../store/selectors";
+import { isSelected, getItem } from "../store/selectors";
 
 const getImage = name => `https://api.adorable.io/avatars/200/${name}.png`;
 
@@ -39,8 +39,9 @@ class Card extends Component {
   }
 }
 
-const mapStateToProps = (state, { item: { id } }) => ({
-  isSelected: isSelected(state, id)
+const mapStateToProps = (state, { id }) => ({
+  isSelected: isSelected(state, id),
+  item: getItem(state, id)
 });
 export default connect(
   mapStateToProps,

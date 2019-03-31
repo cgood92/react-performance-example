@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
 
-import { getItems } from "../store/selectors";
+import { getItemIds } from "../store/selectors";
 import Card from "./card";
 
 const GridContainer = styled.section`
@@ -10,16 +10,16 @@ const GridContainer = styled.section`
   flex-flow: row wrap;
 `;
 
-export const Grid = ({ items }) => (
+export const Grid = ({ ids }) => (
   <GridContainer>
-    {items.map(item => (
-      <Card key={item.id} item={item} />
+    {ids.map(id => (
+      <Card key={id} id={id} />
     ))}
   </GridContainer>
 );
 
 const mapStateToProps = state => ({
-  items: getItems(state)
+  ids: getItemIds(state)
 });
 
 export default connect(mapStateToProps)(Grid);

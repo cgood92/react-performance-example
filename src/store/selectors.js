@@ -1,6 +1,11 @@
-export const getItems = state => {
-  const { ids, byId } = state.items;
-  return ids.map(id => byId[id]);
+export const getItemIds = state => {
+  const { ids } = state.items;
+  return ids;
+};
+
+export const getItem = (state, id) => {
+  const { byId } = state.items;
+  return byId[id];
 };
 
 export const getData = (key, state) => state.other[key];
