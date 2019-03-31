@@ -5,6 +5,7 @@ import { select } from "../store/selected";
 import CardContainer from "./card-container";
 import Caption from "./caption";
 import Image from "./image";
+import { isSelected } from "../store/selectors";
 
 const getImage = name => `https://api.adorable.io/avatars/200/${name}.png`;
 
@@ -26,8 +27,8 @@ class Card extends Component {
     return true;
   }
   render() {
-    const { item, select } = this.props;
-    const { id, name, isSelected } = item;
+    const { id, isSelected, item, select } = this.props;
+    const { name } = item;
     console.count(`${name} is rendered`);
     return (
       <CardContainer onClick={() => select(id)} selected={isSelected}>
@@ -38,7 +39,10 @@ class Card extends Component {
   }
 }
 
+const mapStateToProps = (state, { item: { id } }) => ({
+  isSelected: isSelected(state, id)
+});
 export default connect(
-  null,
+  mapStateToProps,
   { select }
 )(Card);
